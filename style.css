@@ -1,0 +1,47 @@
+body {
+	font-family: sans-serif;
+	text-align: center;
+	padding: 10px;
+	transition: all 725ms ease-in-out;
+	text-align: center;
+	margin: 0;
+}
+
+h1 {
+	font-weight: bolder;
+}
+
+canvas {
+	border: 1px black solid;
+	display: block;
+	margin: 20px;
+}
+
+#heading {
+	text-align: center;
+}
+
+#draw {
+	text-align: center;
+}
+
+#myForm {
+	text-align: center; 
+}
+
+#animationOptions {
+	display: none;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.active, .btn:hover {
+  background-color: #666;
+  color: white;
+} 

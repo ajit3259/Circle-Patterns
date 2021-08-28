@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Magical Land</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h1 id="heading">Patterns on Circle </h1>
+	<h2 id="draw"></h2>
+	<div action="#" id="myForm">
+		<label for="noOfPoints">No of Points:</label>
+			<input type="number" name="noOfPoints" id="noOfPoints" min="2" max="1000" />
+		<label for="designNo">PatternStyle:</label>
+			<input type="range" name="designNo" id="designNo" min="2" max="1000" />
+		<label class="designNo-range-value">2</label>
+	</div>
+	<div id="animationSelection">
+		<button class="btn" onclick="animateOverPoints()" id="btnPoint">Animate over Points</button>
+		<button class="btn" onclick="animateOverPattern()" id="btnPattern">Animate over PatternStyle</button>
+	</div>
+	<div id="animationOptions">
+		<label>Animation Speed:</label>
+		<input type="range" name="animationSpeed" min="10" max="2000" id="animationSpeed">
+		<button class="btn active" onclick="playAnimation(event)">Play Animation</button>
+		<button class="btn" onclick="stopAnimation(event)">Stop Animation</button>
+	</div>
+	<canvas id="board">
+	</canvas>
+</body>
+<script type="text/javascript" src="drawing.js"></script>
+<script type="text/javascript" src="animation.js"></script>
+<script type="text/javascript">
+	let curPoints = 10;
+	let designNo = 2;
+	let animationOver = "points";
+
+	function addActive(button) {
+		let curButtonWithActive = document.getElementsByClassName("active");
+		curButtonWithActive[0].className = curButtonWithActive[0].className.replace(" active", "");
+  		button.className += " active";
+	}
+
+	function changeDesignNoValue(value) {
+		document.querySelector(".designNo-range-value").innerText = value;
+		document.getElementById("designNo").value = value;
+	}
+
+	function changeNoPoints(value) {
+		document.getElementById("noOfPoints").value = value;
+	}
+
+	(function drawDefault() {
+		changeNoPoints(100);
+		changeDesignNoValue(2);
+		draw(100, 2);
+	})();
+
+	function hide() {
+		document.getElementById("animationOptions").style.display = "none";
+	}
+
+	document.getElementById("designNo").onchange = function () {
+			hide();
+			changeDesignNoValue(document.getElementById("designNo").value);
+			callDrawPattern(document.getElementById("noOfPoints").value,
+				document.getElementById("designNo").value);
+	};
+
+
+	document.getElementById("noOfPoints").onchange = function () {
+			hide();
+			callDrawPattern(document.getElementById("noOfPoints").value,
+				document.getElementById("designNo").value);
+	};
+	
+	function clearTimeouts() {	
+		let id = window.setTimeout(function() {}, 0);
+
+		while (id--) {
+    		window.clearTimeout(id);
+		}
+	}
+
+	function animateOverPoints() {
+		clearTimeouts();
+		document.getElementById("animationOptions").style.display = "block";
+		animationOver = "points";
+		addActive(document.getElementById("btnPoint"));
+	}
+	
+	function animateOverPattern() {
+		clearTimeouts();
+		document.getElementById("animationOptions").style.display = "block";
+		animationOver = "pattern";
+		addActive(document.getElementById("btnPattern"));
+	}
+
+
+	function stopAnimation(event) {
+		console.log("Stop Animation called");
+		clearTimeouts();
+	}
+
+	function callDrawPattern(noOfPoints, designNo) {
+		if(noOfPoints > 1000) {
+			alert("Points should be less than or eqaul to 1000");
+		} else if(designNo <= 1) {
+			alert("Times must be greater than 1");
+		} else {
+			document.getElementById("draw").innerText = "Drawing for Number of points = " + noOfPoints;
+			draw(noOfPoints, designNo);
+		}
+	}
+
+</script>
+</html>
