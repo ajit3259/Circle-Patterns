@@ -135,7 +135,7 @@
 	function downloadCanvasImage() {
 		let canvasImageLink = document.getElementById('linkToImage');
   		canvasImageLink.setAttribute('download', 'MyPattern.png');
-  		canvasImageLink.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  		canvasImageLink.setAttribute('href', canvas.toDataURL("image/png"));
   		canvasImageLink.click();
 	}
 
