@@ -13,19 +13,20 @@ function playAnimation() {
 }
 
 function playAnimationOverPoints() {
-	designNo = document.getElementById("designNo").value;
+	designNo = parseInt(document.getElementById("designNo").value);
 	if(curPoints === maxPointsForAnimation) {
 		curPoints = startPoint;
 	}
 	draw(curPoints, designNo);
-	let animationSpeed = 10 + (2000 - document.getElementById("animationSpeed").value);
+	const animationSpeed = 10 + (2000 - document.getElementById("animationSpeed").value);
 	let millis = animationSpeed;
 
-	for(let i = curPoints + 10; i <= maxPointsForAnimation; i+=10) {
+	for(let i = curPoints + 10; i <= maxPointsForAnimation; i+=1) {
 		setTimeout(
 			() => {
 				draw(i, designNo)
 				curPoints = i;
+				//console.log(milllis);
 				changeNoPoints(curPoints);
 			}, millis);
 		millis+=animationSpeed;
@@ -33,19 +34,20 @@ function playAnimationOverPoints() {
 }
 
 function playAnimationOverPattern() {
-	curPoints = document.getElementById("noOfPoints").value;
-	if(designNo >= maxPatternNoForAnimation) {
+	curPoints = parseInt(document.getElementById("noOfPoints").value); 
+	if(designNo === maxPatternNoForAnimation) {
 		designNo = startPattern;
 	}
+	console.log(curPoints, designNo);
 	draw(curPoints, designNo);
-	let animationSpeed = 10 + (2000 - document.getElementById("animationSpeed").value);
+	const animationSpeed = 10 + (2000 - document.getElementById("animationSpeed").value);
 	let millis = animationSpeed;
 
-	for(let i = designNo + 1; i <= maxPatternNoForAnimation; i+=1) {
+	for(let i = parseInt(designNo) + 1; i <= maxPatternNoForAnimation; i+=1) {
 		setTimeout(
 			() => {
 				draw(curPoints, i)
-				designNo = i;
+				designNo = parseInt(i);
 				changeDesignNoValue(designNo);
 			}, millis);
 		millis+=animationSpeed;

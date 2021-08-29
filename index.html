@@ -41,11 +41,13 @@
 	}
 
 	function changeDesignNoValue(value) {
+		designNo = parseInt(value);
 		document.querySelector(".designNo-range-value").innerText = value;
 		document.getElementById("designNo").value = value;
 	}
 
 	function changeNoPoints(value) {
+		curPoints = parseInt(value);
 		document.getElementById("noOfPoints").value = value;
 	}
 
@@ -69,6 +71,7 @@
 
 	document.getElementById("noOfPoints").onchange = function () {
 			hide();
+			changeNoPoints(document.getElementById("noOfPoints").value);
 			callDrawPattern(document.getElementById("noOfPoints").value,
 				document.getElementById("designNo").value);
 	};
@@ -82,14 +85,14 @@
 	}
 
 	function animateOverPoints() {
-		clearTimeouts();
+		//clearTimeouts();
 		document.getElementById("animationOptions").style.display = "block";
 		animationOver = "points";
 		addActive(document.getElementById("btnPoint"));
 	}
 	
 	function animateOverPattern() {
-		clearTimeouts();
+		//clearTimeouts();
 		document.getElementById("animationOptions").style.display = "block";
 		animationOver = "pattern";
 		addActive(document.getElementById("btnPattern"));
