@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>The Magical Land</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>The Magical Land of Patterns</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1 id="heading">Patterns on Circle </h1>
-	<h2 id="draw"></h2>
-	<div action="#" id="myForm">
-		<label for="noOfPoints">No of Points:</label>
-			<input type="number" name="noOfPoints" id="noOfPoints" min="2" max="1000" />
-		<label for="designNo">PatternStyle:</label>
-			<input type="range" name="designNo" id="designNo" min="2" max="1000" />
-		<label class="designNo-range-value">2</label>
+	<div class="card-holder">
+		<div class="card bg-gold">
+			Patterns on Circle
+		</div>
 	</div>
-	<div id="animationSelection">
-		<button class="btn" onclick="animateOverPoints()" id="btnPoint">Animate over Points</button>
-		<button class="btn" onclick="animateOverPattern()" id="btnPattern">Animate over PatternStyle</button>
+	<div class="card-holder container">
+		<h2 id="draw"></h2>
+		<div action="#" id="myForm">
+			<label for="noOfPoints">No of Points:</label>
+				<input type="number" name="noOfPoints" id="noOfPoints" min="2" max="1000" />
+			<label for="designNo">PatternStyle:</label>
+				<input type="range" name="designNo" id="designNo" min="2" max="1000" />
+			<label class="designNo-range-value">2</label>
+		</div>
+		<div id="animationSelection">
+			<button class="btn" onclick="animateOverPoints()" id="btnPoint">Animate over Points</button>
+			<button class="btn" onclick="animateOverPattern()" id="btnPattern">Animate over PatternStyle</button>
+		</div>
+		<div id="animationOptions">
+			<label>Animation Speed:</label>
+			<input type="range" name="animationSpeed" min="10" max="2000" id="animationSpeed">
+			<button class="btn active" onclick="playAnimation(event)">Play Animation</button>
+			<button class="btn" onclick="stopAnimation(event)">Stop Animation</button>
+		</div>
 	</div>
-	<div id="animationOptions">
-		<label>Animation Speed:</label>
-		<input type="range" name="animationSpeed" min="10" max="2000" id="animationSpeed">
-		<button class="btn active" onclick="playAnimation(event)">Play Animation</button>
-		<button class="btn" onclick="stopAnimation(event)">Stop Animation</button>
+	<div class="container canvas_draw">
+		<canvas id="responsive-canvas"></canvas>
 	</div>
-	<canvas id="board">
-	</canvas>
+	<div id="download-section">
+		<button class="btn-lg btn-info" onclick="downloadCanvasImage()">Download Pattern</button>
+		<a id="linkToImage"></a>
+	</div>
 </body>
 <script type="text/javascript" src="drawing.js"></script>
 <script type="text/javascript" src="animation.js"></script>
@@ -113,6 +130,13 @@
 			document.getElementById("draw").innerText = "Drawing for Number of points = " + noOfPoints;
 			draw(noOfPoints, designNo);
 		}
+	}
+
+	function downloadCanvasImage() {
+		let canvasImageLink = document.getElementById('linkToImage');
+  		canvasImageLink.setAttribute('download', 'MyPattern.png');
+  		canvasImageLink.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  		canvasImageLink.click();
 	}
 
 </script>
