@@ -57,8 +57,10 @@ function draw(noOfPoints, times) {
 	draw_heading.innerText = "Number of Points = " + noOfPoints; 
 	//console.log(new Date().getTime(), "animate called for points = ", noOfPoints);
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = "#f9f4f4";
+	context.fillRect(0, 0, canvas.width, canvas.height);
 	context.lineWidth = 2;
-	//context.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
+	context.strokeStyle = "black";
 	context.beginPath();
 
 	let center_x = width/2;
